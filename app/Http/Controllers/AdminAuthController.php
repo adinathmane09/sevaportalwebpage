@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;   
+use Illuminate\Support\Facades\Hash;
+use App\Models\Admin;
+
 // use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller
@@ -29,7 +32,7 @@ class AdminAuthController extends Controller
         $admin = DB::table('admins')->where('username', $request->username)->first();
 
         // Compare the password directly (plain text comparison)
-        if ($admin && $request->password === $admin->password) {
+      if (Hash::check($request->password, $admin->password)) {
             return redirect('/dashboard')->with('success', 'Welcome, Admin!');
         }
 
@@ -66,5 +69,22 @@ class AdminAuthController extends Controller
         $request->session()->regenerateToken(); // Prevent CSRF after logout
         return redirect()->route('admin.login')->with('success', 'Logged out successfully.');
     }
+
+
+
+public function storeUser(Request $request)
+{
+    $request->validate([
+        'username' => 'required|string|max:255|unique:admins,username',
+        'password' => 'required|string|min:6',
+    ]);
+
+    Admin::create([
+        'username' => $request->username,
+        'password' => Hash::make($request->password),
+    ]);
+
+    return redirect()->route('dashboard.add_user')->with('success', 'User added successfully!');
+}
 
 }

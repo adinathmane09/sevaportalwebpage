@@ -61,3 +61,5 @@ Route::post('/admin/open-tickets/update', [OpenTicketsController::class, 'update
 //close tickets controller
 Route::get('/admin/closed-tickets', [ClosedTicketController::class, 'index'])->name('dashboard.closed_tickets');
 Route::get('/admin/closed-tickets/fetch', [ClosedTicketController::class, 'fetch'])->name('closed_tickets.fetch');
+ //add user
+ Route::post('/dashboard/store-user', [AdminAuthController::class, 'storeUser'])->name('dashboard.store_user');

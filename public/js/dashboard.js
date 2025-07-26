@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadTickets();
 });
 
+
 function loadTickets() {
     fetch(fetchRoute)
         .then(res => res.json())
