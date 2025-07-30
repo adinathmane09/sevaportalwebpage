@@ -6,8 +6,10 @@ function loadTickets() {
     fetch(fetchRoute)
         .then(res => res.json())
         .then(data => {
+            originalTicketData = data; 
+            renderTickets(data); 
             const tbody = document.getElementById("ticketBody");
-            tbody.innerHTML = "";
+            tbody.innerHTML = "";//clears all tbody data lol
 
             data.forEach(ticket => {
                 const showActions = isAllTicketsPage === "true";
@@ -16,7 +18,7 @@ function loadTickets() {
                     <td>
                         <button onclick="updateTicket(this)">💾</button>
                         <button onclick="deleteTicket(${ticket.id})">🗑️</button>
-                    </td>` : "";
+                    </td>` : "";//om omkar awale 
 
                 tbody.innerHTML += `
                      <tr data-id="${ticket.id}">
@@ -129,4 +131,76 @@ function downloadCSV() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+let originalTicketData = []; // Store all ticket data
+
+function searchById() {
+    const searchValue = document.getElementById("searchId").value.trim();
+    const tbody = document.getElementById("ticketBody");
+
+    // Restore original if search is empty
+    if (searchValue === "") {
+        renderTickets(originalTicketData);
+        return;
+    }
+
+    // Find the ticket by ID
+    const matched = originalTicketData.find(t => t.id.toString() === searchValue);
+
+    if (matched) {
+        const others = originalTicketData.filter(t => t.id.toString() !== searchValue);
+        renderTickets([matched, ...others]);
+
+        // Wait for DOM update then highlight
+        setTimeout(() => {
+            const firstRow = document.querySelector("#ticketBody tr");
+            if (firstRow) {
+                firstRow.classList.add("highlight-row");
+
+                // Optional: Remove highlight after a few seconds
+                setTimeout(() => {
+                    firstRow.classList.remove("highlight-row");
+                }, 3000);
+            }
+        }, 100);
+    }
+}
+
+function renderTickets(tickets) {
+    const tbody = document.getElementById("ticketBody");
+    tbody.innerHTML = "";
+
+    tickets.forEach(ticket => {
+        const showActions = isAllTicketsPage === "true";
+
+        const buttons = showActions ? `
+            <td>
+                <button onclick="updateTicket(this)">💾</button>
+                <button onclick="deleteTicket(${ticket.id})">🗑️</button>
+            </td>` : "";
+
+        tbody.innerHTML += `
+            <tr data-id="${ticket.id}">
+                <td>#${ticket.id}</td>
+                <td contenteditable="${showActions}">${ticket.name}</td>
+                <td contenteditable="${showActions}">${ticket.subject}</td>
+                <td contenteditable="${showActions}">${ticket.status}</td>
+                <td contenteditable="${showActions}">${ticket.raised_by}</td>
+                <td contenteditable="${showActions}">${ticket.priority}</td>
+
+                <td>
+                    ${ticket.media_path
+                        ? `<a href="${ticket.media_path}" target="_blank">${ticket.media_path.includes('.mp4') ? '🎥 Video' : '🖼️ Image'}</a>`
+                        : 'No Media'}
+                </td>
+
+                <td>
+                    ${ticket.location_url ? `<a href="${ticket.location_url}" target="_blank">📍 View</a>` : 'No Location'}
+                </td>
+
+                ${buttons}
+            </tr>
+        `;
+    });
 }

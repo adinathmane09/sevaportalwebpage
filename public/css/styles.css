@@ -1,18 +1,18 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #002147;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content:center;
+    align-items:center;
     height: 100vh;
     margin: 0;
 }
 .login-container {
     background: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 600px;
     text-align: center;
 }
 .login-container h1 {
@@ -20,15 +20,16 @@ body {
     margin-bottom: 20px;
 }
 .login-container input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    border: 1px solid black;
     border-radius: 5px;
 }
 .login-container button {
-    width: 100%;
+    width: 98%;
     padding: 10px;
+    margin: 10px 0;
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -39,4 +40,13 @@ body {
     color: red;
     margin-top: 10px;
     font-size: 14px;
+}
+.gov-logo {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+.ee{
+    color: green;
 }

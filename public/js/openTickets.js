@@ -41,7 +41,7 @@ function loadOpenTickets() {
 }
 
 function generateOptions(currentStatus) {
-    const statuses = ['open', 'visiting site', 'in progress', 'completed', 'closed'];
+    const statuses = ['opend', 'visiting site', 'in progress', 'completed', 'closed'];
     return statuses.map(status =>
         `<option value="${status}" ${status === currentStatus ? 'selected' : ''}>${capitalize(status)}</option>`
     ).join('');

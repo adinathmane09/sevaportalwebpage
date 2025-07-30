@@ -29,7 +29,7 @@
     <div class="main-content">
        <header class="main-header">
     <img src="{{ asset('images/gov-logo.png') }}" alt="Gov Logo" class="gov-logo">
-    <h1>Sevaportal Ticket System</h1>
+    <h1>Sevaportal Complaint System</h1>
     <p class="subtitle">Municipality Service Portal</p>
       <form method="POST" action="{{ route('admin.logout') }}" class="logout-form" style="position:absolute; top:115px; right:40px;">
         @csrf
@@ -38,16 +38,16 @@
 </header>
 
      <div class="login-container">
-    <h1>Add User</h1>
+    <h1>Add Staffs</h1>
 
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
 
-    <form method="POST" action="{{ route('dashboard.store_user') }}">
+    <form method="POST" action="{{ route('dashboard.store_user') }}" autocomplete="off">
         @csrf
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" required autocomplete="off">
+        <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
         <button type="submit">Add</button>
     </form>
 </div>

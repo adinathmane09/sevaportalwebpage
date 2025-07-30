@@ -120,3 +120,57 @@ body {
     border: 1px solid #ccc;
 
 }
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ticket-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.ticket-actions {
+    display: flex;
+    padding-top: 5px;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-input {
+    width: 630px;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-btn {
+    padding: 6px 12px;
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-btn {
+    padding: 6px 12px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover,
+.download-btn:hover {
+    opacity: 0.9;
+}
+
+.highlight-row {
+    background-color: #fff3cd; /* Light yellow */
+    transition: background-color 0.5s ease;
+}

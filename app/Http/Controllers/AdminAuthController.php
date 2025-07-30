@@ -13,8 +13,12 @@ class AdminAuthController extends Controller
 {
     public function showDashboard()
     {
-        return view('admin.dashboard'); // Ensure the view file path is correct
+        if (!session('admin_logged_in')) {
+            return redirect('/admin/login')->withErrors(['login' => 'Please log in to access the dashboard.']);
+            }
+        return view('admin.dashboard');
     }
+
 
     public function showLogin()
     {
@@ -32,11 +36,12 @@ class AdminAuthController extends Controller
         $admin = DB::table('admins')->where('username', $request->username)->first();
 
         // Compare the password directly (plain text comparison)
-      if (Hash::check($request->password, $admin->password)) {
-            return redirect('/dashboard')->with('success', 'Welcome, Admin!');
-        }
-
-        return back()->withErrors(['login' => 'Invalid username or password']);
+       if ($admin && Hash::check($request->password, $admin->password)) {
+        // You can also set a session here if you want to track login
+        session(['admin_logged_in' => true, 'admin_username' => $admin->username]);
+        return redirect('/dashboard')->with('success', 'Welcome, Admin!');
+    }
+    return back()->withErrors(['login' => 'Wrong username or password. Try again!'])->withInput();
     }
 
     public function showAllTickets()
@@ -52,11 +57,6 @@ class AdminAuthController extends Controller
     public function showClosedTickets()
     {
         return view('dashboard.closed_tickets'); // Closed Tickets view
-    }
-
-    public function showPriorityTickets()
-    {
-        return view('dashboard.priority_tickets'); // Priority Tickets view
     }
 
     public function showAddUser()

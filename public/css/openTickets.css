@@ -113,10 +113,10 @@ body {
     margin: 0 auto 10px;
 }
 .scrollable-section {
-   
+    
     overflow-y: auto;
-    max-height: calc(100vh - 160px); /* Adjusts based on your header height */
-    padding-right: 10px; /* Optional: avoids scrollbar overlay */
+    max-height: calc(100vh - 160px);
+    padding-right: 10px;
 
 }
 .open-tickets-header {

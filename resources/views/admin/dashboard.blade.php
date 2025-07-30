@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Governance Admin Dashboard</title>
+    <title>Sevaportal Admin Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/dashstyles.css') }}">
 </head>
 <body>
 <div class="dashboard-container">
 
-    <!-- Sidebar -->
+   
     <aside class="sidebar">
         <h1 class="gov-title">Admin Portal</h1>
         <nav>
@@ -18,18 +18,17 @@
                 <li><a href="{{ route('dashboard.all_tickets') }}">📋 All Tickets</a></li>
                 <li><a href="{{ route('dashboard.open_tickets') }}">🟢 Open</a></li>
                 <li><a href="{{ route('dashboard.closed_tickets') }}">🔴 Closed</a></li>
-                {{-- <li><a href="{{ route('dashboard.priority_tickets') }}">⚠️ Priority</a></li> --}}
                 <li><a href="{{ route('dashboard.add_user') }}">👤 Add User</a></li>
              
             </ul>
         </nav>
     </aside>
 
-    <!-- Main Content -->
+
     <div class="main-content">
        <header class="main-header">
     <img src="{{ asset('images/gov-logo.png') }}" alt="Gov Logo" class="gov-logo">
-    <h1>Sevaportal Ticket System</h1>
+    <h1>Sevaportal Complaint System</h1>
     <p class="subtitle">Municipality Service Portal</p>
     <form method="POST" action="{{ route('admin.logout') }}" class="logout-form" style="position:absolute; top:115px; right:40px;">
         @csrf
@@ -40,15 +39,27 @@
 
 <div class="scrollable-section">
 
-        <!-- Summary Cards -->
-        <section class="summary-cards">
-            <div class="card blue"><h3>Total Complaints</h3><p>124</p></div>
-            <div class="card green"><h3>Open</h3><p>45</p></div>
-            <div class="card red"><h3>Closed</h3><p>79</p></div>
-            <div class="card yellow"><h3>Priority</h3><p>6</p></div>
-        </section>
+    <section class="summary-cards">
+         <div class="card blue">
+            <h3>Total Complaints</h3>
+            <p id="totalCount">0</p>
+        </div>
+     <div class="card green">
+            <h3>Opend</h3>
+            <p id="openCount">0</p>
+    </div>
+        <div class="card red">
+             <h3>Closed</h3>
+             <p id="closedCount">0</p>
+        </div>
+     <div class="card yellow">
+              <h3>Priority</h3>
+             <p id="priorityCount">0</p>
+    </div>
 
-        <!-- Table Section -->
+    </section>
+
+       
         <main class="content">
             <section class="ticket-table">
                 <table>
@@ -66,7 +77,7 @@
                         </tr>
                     </thead>
                     <tbody id="ticketBody">
-                        <!-- Data from JS -->
+                        <!-- Data JavaScript-->
                     </tbody>
                 </table>
             </section>

@@ -29,7 +29,7 @@
     <div class="main-content">
        <header class="main-header">
     <img src="{{ asset('images/gov-logo.png') }}" alt="Gov Logo" class="gov-logo">
-    <h1>Sevaportal Ticket System</h1>
+    <h1>Sevaportal Complaint System</h1>
     <p class="subtitle">Municipality Service Portal</p>
       <form method="POST" action="{{ route('admin.logout') }}" class="logout-form" style="position:absolute; top:115px; right:40px;">
         @csrf
@@ -61,12 +61,22 @@
                     <tbody id="ticketBody">
                         <!-- Data from JS -->
                     </tbody>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h1 style="margin: 0; font-size: 24px; color: #333;">  All Tickets :</h1>
-                            <button onclick="downloadCSV()" style="padding: 6px 12px; background-color: #5cb85c; color: white; border: none; border-radius: 5px;">
-                                ⬇️ Download CSV
-                            </button>
-                    </div>
+                    <div class="ticket-header">
+    <h1>All Tickets :</h1>
+    
+    <div class="ticket-actions">
+        <input type="text" id="searchId" placeholder="Search by ID" class="search-input">
+
+        <button onclick="searchById()" class="search-btn">
+            🔍 Search
+        </button>
+
+        <button onclick="downloadCSV()" class="download-btn">
+            ⬇️ Download CSV
+        </button>
+    </div>
+</div>
+
                 </table>
                 </div>
             </section>

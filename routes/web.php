@@ -17,9 +17,8 @@ use App\Http\Controllers\ClosedTicketController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/admin/login'); // or any default page you want
 });
-
 
 // Admin login routes
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
@@ -38,11 +37,9 @@ Route::get('/open_tickets', [AdminAuthController::class, 'showOpenTickets'])->na
 // Route for Closed Tickets
 Route::get('/closed_tickets', [AdminAuthController::class, 'showClosedTickets'])->name('dashboard.closed_tickets');
 
-// Route for Priority Tickets
-Route::get('/priority_tickets', [AdminAuthController::class, 'showPriorityTickets'])->name('dashboard.priority_tickets');
-
 // Route for Add User
 Route::get('/add_user', [AdminAuthController::class, 'showAddUser'])->name('dashboard.add_user');
+ 
 // Route for logout
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
