@@ -59,6 +59,11 @@ class AdminAuthController extends Controller
         return view('dashboard.closed_tickets'); // Closed Tickets view
     }
 
+     public function showManagetickets()
+    {
+        return view('dashboard.Managetickets'); // Open Tickets view
+    }
+
     public function showAddUser()
     {
         return view('dashboard.add_user'); // Add User view

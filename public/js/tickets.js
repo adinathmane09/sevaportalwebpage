@@ -16,6 +16,7 @@ function loadTickets() {
 
                 const buttons = showActions ? `
                     <td>
+                        <button onclick="enableEdit(this)">✏️</button>
                         <button onclick="updateTicket(this)">💾</button>
                         <button onclick="deleteTicket(${ticket.id})">🗑️</button>
                     </td>` : "";//om omkar awale 
@@ -23,11 +24,11 @@ function loadTickets() {
                 tbody.innerHTML += `
                      <tr data-id="${ticket.id}">
                         <td>#${ticket.id}</td>
-                        <td contenteditable="${showActions}">${ticket.name}</td>
-                        <td contenteditable="${showActions}">${ticket.subject}</td>
-                        <td contenteditable="${showActions}">${ticket.status}</td>
-                        <td contenteditable="${showActions}">${ticket.raised_by}</td>
-                        <td contenteditable="${showActions}">${ticket.priority}</td>
+                        <td>${ticket.name}</td>
+                        <td>${ticket.subject}</td>
+                        <td>${ticket.status}</td>
+                        <td>${ticket.raised_by}</td>
+                        <td>${ticket.priority}</td>
 
                        
                         <!-- Media column -->
@@ -176,6 +177,7 @@ function renderTickets(tickets) {
 
         const buttons = showActions ? `
             <td>
+                <button onclick="enableEdit(this)">✏️</button>
                 <button onclick="updateTicket(this)">💾</button>
                 <button onclick="deleteTicket(${ticket.id})">🗑️</button>
             </td>` : "";
@@ -183,11 +185,11 @@ function renderTickets(tickets) {
         tbody.innerHTML += `
             <tr data-id="${ticket.id}">
                 <td>#${ticket.id}</td>
-                <td contenteditable="${showActions}">${ticket.name}</td>
-                <td contenteditable="${showActions}">${ticket.subject}</td>
-                <td contenteditable="${showActions}">${ticket.status}</td>
-                <td contenteditable="${showActions}">${ticket.raised_by}</td>
-                <td contenteditable="${showActions}">${ticket.priority}</td>
+                <td>${ticket.name}</td>
+                <td>${ticket.subject}</td>
+                <td>${ticket.status}</td>
+                <td>${ticket.raised_by}</td>
+                <td>${ticket.priority}</td>
 
                 <td>
                     ${ticket.media_path
@@ -203,4 +205,26 @@ function renderTickets(tickets) {
             </tr>
         `;
     });
+}
+
+function enableEdit(button) {
+    // Disable all rows first
+    document.querySelectorAll("#ticketBody tr").forEach(row => {
+        for (let i = 1; i <= 5; i++) {
+            row.cells[i].setAttribute("contenteditable", "false");
+        }
+        // Hide save buttons
+        const saveBtn = row.querySelector("button[onclick^='updateTicket']");
+        if (saveBtn) saveBtn.style.display = "none";
+    });
+
+    // Enable current row
+    const row = button.closest("tr");
+    for (let i = 1; i <= 5; i++) {
+        row.cells[i].setAttribute("contenteditable", "true");
+    }
+
+    // Show save button for this row
+    const saveBtn = row.querySelector("button[onclick^='updateTicket']");
+    if (saveBtn) saveBtn.style.display = "inline-block";
 }

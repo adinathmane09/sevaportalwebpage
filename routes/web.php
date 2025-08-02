@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\OpenTicketsController;
 use App\Http\Controllers\ClosedTicketController;
+use App\Http\Controllers\ManageTicketController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,8 @@ Route::get('/open_tickets', [AdminAuthController::class, 'showOpenTickets'])->na
 // Route for Closed Tickets
 Route::get('/closed_tickets', [AdminAuthController::class, 'showClosedTickets'])->name('dashboard.closed_tickets');
 
+Route::get('/Managetickets', [AdminAuthController::class, 'showManagetickets'])->name('dashboard.Managetickets');
+
 // Route for Add User
 Route::get('/add_user', [AdminAuthController::class, 'showAddUser'])->name('dashboard.add_user');
  
@@ -60,3 +63,10 @@ Route::get('/admin/closed-tickets', [ClosedTicketController::class, 'index'])->n
 Route::get('/admin/closed-tickets/fetch', [ClosedTicketController::class, 'fetch'])->name('closed_tickets.fetch');
  //add user
  Route::post('/dashboard/store-user', [AdminAuthController::class, 'storeUser'])->name('dashboard.store_user');
+
+
+Route::get('/admin/managetickets', [TicketController::class, 'manageTickets'])->name('dashboard.Managetickets');
+Route::post('/admin/raise-ticket', [TicketController::class, 'raiseTicket'])->name('tickets.raise');
+
+Route::get('/dashboard/raise-ticket/{id}', [TicketController::class, 'show'])->name('dashboard.raise_ticket');
+Route::post('/dashboard/raise-ticket/store', [TicketController::class, 'raiseTicket'])->name('dashboard.raise_ticket_store');

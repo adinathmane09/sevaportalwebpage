@@ -18,7 +18,7 @@
                 <li><a href="{{ route('dashboard.all_tickets') }}">📋 All Tickets</a></li>
                 <li><a href="{{ route('dashboard.open_tickets') }}">🟢 Open</a></li>
                 <li><a href="{{ route('dashboard.closed_tickets') }}">🔴 Closed</a></li>
-                {{-- <li><a href="{{ route('dashboard.priority_tickets') }}">⚠️ Priority</a></li> --}}
+                <li><a href="{{ route('dashboard.Managetickets') }}">⚠️ Raise Tickets</a></li>
                 <li><a href="{{ route('dashboard.add_user') }}">👤 Add User</a></li>
             </ul>
         </nav>
