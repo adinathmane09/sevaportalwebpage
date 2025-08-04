@@ -70,7 +70,15 @@
                                     </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('dashboard.raise_ticket', $complaint->id) }}" class="btn btn-warning" style="padding: 4px 8px; background-color: orange; color: white; text-decoration: none; border-radius: 5px;">Raise Ticket</a>
+                                        @if($complaint->is_raised)
+                                            <button disabled style="padding: 4px 8px; background-color: gray; color: white; border: none; border-radius: 5px;">Raised</button>
+                                        @else
+                                            <a href="{{ route('dashboard.raise_ticket', $complaint->id) }}"
+                                            class="btn btn-warning"
+                                            style="padding: 4px 8px; background-color: orange; color: white; text-decoration: none; border-radius: 5px;">
+                                            Raise Ticket
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                     @endforeach
@@ -92,6 +100,7 @@
         const el = document.getElementById("details-" + id);
         el.style.display = el.style.display === "none" ? "block" : "none";
     }
+    
 </script>
 
 </body>

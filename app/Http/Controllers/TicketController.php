@@ -55,8 +55,7 @@ class TicketController extends Controller
 }
 
 public function raiseTicket(Request $request)
-{
-    $request->validate([
+{ $request->validate([
         'complaint_id' => 'required|exists:complaints,id',
         'raised_by' => 'required|string',
         'priority' => 'required|in:High,Medium,Low',
@@ -72,10 +71,13 @@ public function raiseTicket(Request $request)
         'priority' => $request->priority,
         'description' => $complaint->description,
         'location' => "https://www.google.com/maps?q={$complaint->latitude},{$complaint->longitude}",
-        'image' => $complaint->imagePath,
+        'image' => $complaint->image_path,
     ]);
 
-   
+    // ✅ Update is_raised to 1
+    $complaint->is_raised = 1;
+    $complaint->save();
+
     return redirect()->route('dashboard.Managetickets')->with('success', 'Ticket raised successfully!');
 }
 
